@@ -5,6 +5,7 @@
 #include <memory>
 #include <qlabel.h>
 #include <qlistwidget.h>
+#include <qlogging.h>
 
 ServerContext::ServerContext(QLabel *statusLabel, QProgressBar *progressBar,
                              QListWidget *serverList, QListWidget *queueList)
@@ -37,6 +38,7 @@ ServerContext::ServerContext(QLabel *statusLabel, QProgressBar *progressBar,
 }
 void ServerContext::setState(std::shared_ptr<ServerState> newState) {
   m_currentState = newState;
+  qDebug() << "STATE: Cambio de estado -> " << m_currentState->name();
   m_statusLabel->setText(m_currentState->name());
   m_statusLabel->setStyleSheet(
       QString("font-weight: bold; padding: 5px; border-radius: 3px; %1")
@@ -45,7 +47,7 @@ void ServerContext::setState(std::shared_ptr<ServerState> newState) {
 void ServerContext::uploadFile(const QString &fileName) {
   m_currentFileProcessing = fileName;
   m_progressBar->setValue(0);
-  m_uploadTimer.start(150);
+  m_uploadTimer.start(250);
 }
 
 void ServerContext::enqueueFile(const QString &fileName) {

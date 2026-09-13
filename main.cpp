@@ -18,19 +18,20 @@ int main(int argc, char *argv[]) {
   window.setWindowTitle("Simulador State Pattern - Qt6");
   window.resize(650, 400);
 
-  // Panel Cliente
   QVBoxLayout *clientLayout = new QVBoxLayout();
   QLabel *clientTitle = new QLabel("<b>CLIENTE (Archivos Locales)</b>");
   QListWidget *clientList = new QListWidget();
   clientList->setDragEnabled(true);
+  clientList->setDragDropMode(QAbstractItemView::DragOnly);
+  clientList->setDefaultDropAction(Qt::CopyAction);
+
   clientList->addItems(
       {"Documento.pdf", "Imagen.png", "Video.mp4", "Datos.csv"});
   clientLayout->addWidget(clientTitle);
   clientLayout->addWidget(clientList);
 
-  // Panel Servidor
   QVBoxLayout *serverLayout = new QVBoxLayout();
-  QLabel *serverTitle = new QLabel("<b>SERVIDOR (Zona Drag & Drop)</b>");
+  QLabel *serverTitle = new QLabel("<b>SERVIDOR (Drag and Drop)</b>");
   QLabel *statusLabel = new QLabel();
   QProgressBar *progressBar = new QProgressBar();
   progressBar->setRange(0, 100);
@@ -53,7 +54,6 @@ int main(int argc, char *argv[]) {
   ServerDropArea *serverDropWidget = new ServerDropArea(server);
   serverDropWidget->setLayout(serverLayout);
 
-  // Botones de Control
   QHBoxLayout *controlLayout = new QHBoxLayout();
   QPushButton *toggleBtn = new QPushButton("Cambiar Estado (Down/Available)");
   QPushButton *resetBtn = new QPushButton("Resetear Simulación");
@@ -61,7 +61,6 @@ int main(int argc, char *argv[]) {
   controlLayout->addWidget(toggleBtn);
   controlLayout->addWidget(resetBtn);
 
-  // Layout Principal
   QHBoxLayout *mainLayout = new QHBoxLayout();
   QWidget *clientWidget = new QWidget();
   clientWidget->setLayout(clientLayout);
