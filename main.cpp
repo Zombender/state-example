@@ -15,11 +15,11 @@ int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
 
   QWidget window;
-  window.setWindowTitle("Simulador State Pattern - Qt6");
+  window.setWindowTitle("State pattern");
   window.resize(650, 400);
 
   QVBoxLayout *clientLayout = new QVBoxLayout();
-  QLabel *clientTitle = new QLabel("<b>CLIENTE (Archivos Locales)</b>");
+  QLabel *clientTitle = new QLabel("<b>Cliente (Archivos Locales)</b>");
   QListWidget *clientList = new QListWidget();
   clientList->setDragEnabled(true);
   clientList->setDragDropMode(QAbstractItemView::DragOnly);
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
   clientLayout->addWidget(clientList);
 
   QVBoxLayout *serverLayout = new QVBoxLayout();
-  QLabel *serverTitle = new QLabel("<b>SERVIDOR (Drag and Drop)</b>");
+  QLabel *serverTitle = new QLabel("<b>Servidor (Drag and Drop)</b>");
   QLabel *statusLabel = new QLabel();
   QProgressBar *progressBar = new QProgressBar();
   progressBar->setRange(0, 100);
